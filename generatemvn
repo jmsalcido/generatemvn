@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Im lazy to remember all the mvn arguments so I made this bad script to autocomplete it, I just need to look for the archetype.
+# also, first bash script.
+#
+# author:
+# jmsalcido@otfusion.org
+#
+USAGE='usage: '`basename $0`' [h,help,-h | groupId] [artifactId] [archetype]'
+groupId="personal"
+artifactId="maven-java-quickstart"
+archetype="maven-archetype-quickstart"
+if [ ! -z $1 ] ; then
+    # TODO this MUST be in 1 if...
+    if [ $1 = "h" ] ; then
+        echo $USAGE
+        exit 1
+    fi
+    if [ $1 = "-h" ] ; then
+        echo $USAGE
+        exit 1
+    fi
+    if [ $1 = "help" ] ; then
+        echo $USAGE
+        exit 1
+    fi
+    # ENDTODO
+    if [ ! -z $2 ] ; then
+        if [ ! -z $3 ] ; then
+            echo "launching: mvn archetype:generate -DgroupId=$1 -DartifactId=$2 -DarchetypeArtifactId=$3 -DinteractiveMode=false"
+            mvn archetype:generate -DgroupId=$1 -DartifactId=$2 -DarchetypeArtifactId=$3 -DinteractiveMode=false
+        fi
+
+        # No artifact... using java quickstart
+        echo "No archetype received, using default value"
+        mvn archetype:generate -DgroupId=$1 -DartifactId=$2 -DarchetypeArtifactId=$archetype -DinteractiveMode=false
+    fi
+else
+    echo "Using interactive mode for default values"
+    mvn archetype:generate -DgroupId=$groupId -DartifactId=$artifactId -DarchetypeArtifactId=$archetype -DinteractiveMode=true
+fi
