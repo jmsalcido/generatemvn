@@ -4,7 +4,7 @@
 # also, first bash script.
 #
 # author:
-# jmsalcido@otfusion.org
+# jsalcido@nearsoft.com
 #
 USAGE='usage: '`basename $0`' [h,help,-h | groupId] [artifactId] [archetype]'
 groupId="personal"
